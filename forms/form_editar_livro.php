@@ -5,7 +5,7 @@ if(!isset($_SESSION['id'])){
 }
     if(isset($_GET)){
         //Conexão com o banco de dados
-        $db = new mysqli("localhost", "root", "", "colecao_livros");
+        $db = new mysqli("localhost", "root", "", "pokemons_dataset");
 
         $stmt = $db->prepare("select * from livros where idLivro = ?");
         
@@ -35,9 +35,9 @@ if(!isset($_SESSION['id'])){
         <div class='box'>
             <h1>Editar livro</h1>
             <form method='post' action='/IFRS-Pokepedia/src/editLivro.php'>
-                <label for=titulo>Título</label>
+                <label for=Name>Título</label>
                 <?php
-                    echo "<input type=text id=titulo required name=titulo value='{$livro['titulo']}'>";
+                    echo "<input type=text id=Name required name=Name value='{$livro['Name']}'>";
                 ?>
                 <label for=ano>Ano</label>
                 <?php

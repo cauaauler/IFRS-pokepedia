@@ -7,13 +7,13 @@
         $senha = htmlspecialchars($_POST['senha']);
 
         //Conecta com o banco
-        $db = new mysqli('localhost','root','','colecao_livros');
+        $db = new mysqli('localhost','root','','pokemons_dataset');
         
         //Gera uma variável criptografada
         $password_hash = password_hash($_POST['senha'],PASSWORD_BCRYPT);
         
         //Prepara a query
-        $stmt = $db->prepare("insert into pessoas (email,senha) values (?,?)");
+        $stmt = $db->prepare("insert into pessoa (email,senha) values (?,?)");
         
         /* Insere as variáveis de forma segura
           ss é String String

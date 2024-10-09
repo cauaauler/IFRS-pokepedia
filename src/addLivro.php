@@ -6,17 +6,17 @@ if(!isset($_SESSION['id'])){
 
     if(isset($_POST)){
         //Conexão com o banco de dados
-        $db = new mysqli("localhost", "root", "", "colecao_livros");
+        $db = new mysqli("localhost", "root", "", "pokemons_dataset");
         
-        $titulo = htmlspecialchars($_POST['titulo']);
+        $Name = htmlspecialchars($_POST['Name']);
         $autor = htmlspecialchars($_POST['autor']);
         $ano = filter_var($_POST['ano'],FILTER_SANITIZE_NUMBER_INT);
         $id_pessoa = $_SESSION['id'];
 
         //Query de consulta
-        $stmt = $db->prepare("insert into livros (titulo,autor,ano,id_pessoa) values (?,?,?,?)");
+        $stmt = $db->prepare("insert into livros (Name,autor,ano,id_pessoa) values (?,?,?,?)");
 
-        $stmt->bind_param("ssii",$titulo,$autor,$ano,$id_pessoa);
+        $stmt->bind_param("ssii",$Name,$autor,$ano,$id_pessoa);
 
         //Executa a consulta e armazena o resultado
         $stmt->execute();

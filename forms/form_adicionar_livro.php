@@ -17,8 +17,8 @@ if(!isset($_SESSION['id'])){
         <div class='box'>
             <h1>Adicionar livro</h1>
             <form method='post' action='/IFRS-Pokepedia/src/addLivro.php'>
-                <label for=titulo>Título</label>
-                <input type=text id=titulo required name=titulo>
+                <label for=Name>Título</label>
+                <input type=text id=Name required name=Name>
                 <br>
                 <label for=ano>Ano</label>
                 <input type=number id=ano required name=ano>

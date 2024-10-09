@@ -6,7 +6,7 @@ if(!isset($_SESSION['id'])){
 
     if(isset($_GET)){
         //Conexão com o banco de dados
-        $db = new mysqli("localhost", "root", "", "colecao_livros");
+        $db = new mysqli("localhost", "root", "", "pokemons_dataset");
         
         $id_livro = filter_var($_GET['idlivro'],FILTER_SANITIZE_NUMBER_INT);
         
