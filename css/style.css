@@ -65,3 +65,8 @@ th,tr,td{
    border: 1px solid black;
    padding: 10px; 
 }
+nav {
+    display: flex; 
+    justify-content: flex-start; 
+    text-align: left;
+}

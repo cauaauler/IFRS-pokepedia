@@ -15,6 +15,9 @@ if ($db->connect_error) {
     die("Erro de conexão: " . $db->connect_error);
 }
 
+$id_pessoa = $_SESSION['id'];
+
+
 $ordem_permitidas = ['name', 'attack', 'defense', 'pokedex_number', 'type', 'is_legendary'];
 $ordem = isset($_GET['ordem']) && in_array(strtolower($_GET['ordem']), $ordem_permitidas) ? $_GET['ordem'] : 'pokedex_number';
 
@@ -25,6 +28,10 @@ $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $di
 $stmt = $db->prepare("SELECT * FROM pokemon ORDER BY {$ordem} {$direcao}");
 $stmt->execute();
 $resultado = $stmt->get_result();
+
+$stmt = $db->prepare("SELECT * FROM pessoa WHERE id_pessoa = {$id_pessoa}");
+$stmt->execute();
+$resultado_treinador = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +43,13 @@ $resultado = $stmt->get_result();
 </head>
 <body>
     <div class='container'>
+    <?php 
+$treinador = $resultado_treinador->fetch_assoc();
+echo "<nav>{$treinador['email']} <a href='/IFRS-Pokepedia/src/perfil.php'>Meu Perfil</a></nav>";
+?>
+        
         <h1>Pokédex</h1>
+        
         <?php 
         if ($resultado->num_rows == 0) {
             echo "Não há pokémons cadastrados";

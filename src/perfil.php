@@ -41,11 +41,23 @@ ml>
 <body>
     <div class='container'>
     <h1>Perfil de treinador</h1>
+    
       <?php 
     if ($resultado->num_rows == 0) {
         echo "Não há pokémon na sua coleção";
     } else {
         $pokemons = $resultado->fetch_all(MYSQLI_ASSOC);
+
+        
+        $totalAtaque = 0;
+        $totalDefesa = 0;
+        $quantidade = count($pokemons);
+
+        foreach ($pokemons as $linha) {
+            $totalAtaque += $linha['Attack'];
+            $totalDefesa += $linha['Defense'];
+        }
+
         echo "<table>";
         echo "<thead>
              <tr>
@@ -55,6 +67,15 @@ ml>
              </tr>
         </thead>";
         echo "</table>";
+        
+        $mediaDefesa = $totalDefesa / $quantidade;
+        $mediaAtaque = $totalAtaque / $quantidade;
+
+        echo "<tr>";
+        echo "<td>{$linha['email']}</td>";
+        echo "<td>$mediaAtaque</td>";
+        echo "<td>$mediaDefesa</td>";
+        echo "</tr>";
 
         echo "<table>";
         echo "<thead>
