@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if(!isset($_SESSION['id'])){
-    header("location: /IFRS-Estudo-Session/index.php");
+    header("location: /IFRS-Pokepedia/index.php");
 }
 
     if(isset($_GET)){
@@ -16,5 +16,5 @@ if(!isset($_SESSION['id'])){
         
         $stmt->execute();
 
-        header("location:/IFRS-Estudo-Session/src/restrita_lista.php");
+        header("location:/IFRS-Pokepedia/src/restrita_lista.php");
     }

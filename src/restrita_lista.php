@@ -4,7 +4,7 @@ session_start();
 // Verifica se a sessão foi criada
 if(!isset($_SESSION['id'])){
     // Se não foi criada a sessão, redireciona para a página inicial
-    header("location: /IFRS-Estudo-Session/index.php");
+    header("location: /IFRS-Pokepedia/index.php");
 }
 
     //Conexão com o banco de dados
@@ -24,7 +24,7 @@ ml>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coleção de Livros</title>
-    <link rel="stylesheet" type="text/css" href="/IFRS-Estudo-Session/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/IFRS-Pokepedia/css/style.css" />
 </head>
 <body>
     <div class='container'>
@@ -49,8 +49,8 @@ ml>
                 echo "<td>{$linha['titulo']}</td>";
                 echo "<td>{$linha['ano']}</td>";
                 echo "<td>{$linha['autor']}</td>";
-                echo "<td><a href='/IFRS-Estudo-Session/src/deleteLivro.php?idlivro={$linha['idLivro']}'>Apagar</a>
-                          <a href='/IFRS-Estudo-Session/forms/form_editar_livro.php?idlivro={$linha['idLivro']}'>Editar</a>
+                echo "<td><a href='/IFRS-Pokepedia/src/deleteLivro.php?idlivro={$linha['idLivro']}'>Apagar</a>
+                          <a href='/IFRS-Pokepedia/forms/form_editar_livro.php?idlivro={$linha['idLivro']}'>Editar</a>
                      </td>";
             echo "</tr>";
         }
@@ -58,8 +58,8 @@ ml>
     }
  
 
-    echo "<a href='/IFRS-Estudo-Session/forms/form_adicionar_livro.php'>Adicionar novo livro</a>";
-    echo "<a href='/IFRS-Estudo-Session/src/logout.php'>Sair</a>";
+    echo "<a href='/IFRS-Pokepedia/forms/form_adicionar_livro.php'>Adicionar novo livro</a>";
+    echo "<a href='/IFRS-Pokepedia/src/logout.php'>Sair</a>";
 
 ?>
     </div>
