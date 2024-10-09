@@ -17,5 +17,5 @@ if(!isset($_SESSION['id'])){
         
         $stmt->execute();
 
-        header("location:/IFRS-Pokepedia/src/restrita_lista.php");
+        header("location:/IFRS-Pokepedia/src/perfil.php");
     }
