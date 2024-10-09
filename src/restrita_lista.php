@@ -63,13 +63,13 @@ $resultado = $stmt->get_result();
                 echo "<td>{$linha['Pokedex_number']}</td>";
                 echo "<td>{$linha['Type']}</td>";
                 echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
-                echo "<td><a href='/IFRS-Pokepedia/forms/form_adicionar_pokemon_colecao.php'>Adicionar a sua coleção</a></td>";
+                echo "<td><a href='/IFRS-Pokepedia/src/addPokemonColecao.php?pokedex_number={$linha['Pokedex_number']}'>Adicionar a sua coleção</a></td>";
                 echo "</tr>";
             }
             echo "</table>";
         }
 
-        // echo "<a href='/IFRS-Pokepedia/src/logout.php'>Sair</a>";
+        echo "<a href='/IFRS-Pokepedia/src/logout.php'>Sair</a>";
         ?>
     </div>
 </body>
