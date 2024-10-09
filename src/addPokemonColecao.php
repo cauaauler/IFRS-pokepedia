@@ -8,15 +8,13 @@ if(!isset($_SESSION['id'])){
         //Conexão com o banco de dados
         $db = new mysqli("localhost", "root", "", "pokemons_dataset");
         
-        $Name = htmlspecialchars($_POST['Name']);
-        $autor = htmlspecialchars($_POST['autor']);
-        $ano = filter_var($_POST['ano'],FILTER_SANITIZE_NUMBER_INT);
+        $pokedex_number = $_GET['pokedex_number'];
         $id_pessoa = $_SESSION['id'];
 
         //Query de consulta
-        $stmt = $db->prepare("insert into livros (Name,autor,ano,id_pessoa) values (?,?,?,?)");
+        $stmt = $db->prepare("insert into pessoa_pokemon (id_pessoa,pokedex_number) values (?,?)");
 
-        $stmt->bind_param("ssii",$Name,$autor,$ano,$id_pessoa);
+        $stmt->bind_param("ii", $id_pessoa, $pokedex_number);
 
         //Executa a consulta e armazena o resultado
         $stmt->execute();
