@@ -19,15 +19,23 @@ $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $di
 
 $id_pessoa = $_SESSION['id'];
 
-//Query de consulta
-$stmt = $db->prepare("select * from pessoa_pokemon pp
-                          join pessoa p on p.id_pessoa = pp.id_pessoa
-                          join pokemon po on po.Pokedex_number = pp.pokedex_number
-                          where p.id_pessoa = {$id_pessoa}");
-// $stmt->bind_param("i",$_SESSION['id']);
+// Pegar os pokemons
+$stmt = $db->prepare(
+    "SELECT * FROM pessoa_pokemon pp
+                          JOIN pessoa p ON p.id_pessoa = pp.id_pessoa
+                          JOIN pokemon po ON po.Pokedex_number = pp.pokedex_number
+                          JOIN type ON po.Type = type.id_type
+                          WHERE p.id_pessoa = ?
+                          ORDER BY po." . $ordem . " " . $direcao
+);
+
+// Para passar o id_pessoa corretamente
+$stmt->bind_param("i", $id_pessoa);
 $stmt->execute();
-//Executa a consulta e armazena o resultado
+// Executa a consulta e armazena o resultado
 $resultado = $stmt->get_result();
+
+
 ?>
 <!DOCTYPE ht
     ml>
@@ -102,7 +110,7 @@ $resultado = $stmt->get_result();
                 echo "<td>{$linha['Attack']}</td>";
                 echo "<td>{$linha['Defense']}</td>";
                 echo "<td>{$linha['Pokedex_number']}</td>";
-                echo "<td>{$linha['Type']}</td>";
+                echo "<td>{$linha['text']}</td>";
                 echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
                 echo "<td><a href='/IFRS-Pokepedia/src/deletePokemonColecao.php?pokedex_number={$linha['Pokedex_number']}'>Remover da coleção</a></td>";
                 echo "</tr>";

@@ -28,8 +28,10 @@ $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $di
 
 // Query de consulta para listar os pokémons que o usuário ainda não tem
 $query = "SELECT * FROM pokemon 
+        JOIN type ON pokemon.Type = type.id_type
         WHERE pokedex_number NOT IN 
         (SELECT pokedex_number FROM pessoa_pokemon WHERE id_pessoa = ?)
+        
         ORDER BY " . $ordem . " " . $direcao;
 
 $stmt = $db->prepare($query);
@@ -50,7 +52,7 @@ $resultado = $stmt->get_result();
 
 <body>
     <div class='container'>
- 
+
         <?php include '../includes/header.php'; ?>
 
         <h1>Pokédex</h1>
@@ -79,7 +81,7 @@ $resultado = $stmt->get_result();
                 echo "<td>" . htmlspecialchars($linha['Attack']) . "</td>";
                 echo "<td>" . htmlspecialchars($linha['Defense']) . "</td>";
                 echo "<td>" . htmlspecialchars($linha['Pokedex_number']) . "</td>";
-                echo "<td>" . htmlspecialchars($linha['Type']) . "</td>";
+                echo "<td>" . htmlspecialchars($linha['text']) . "</td>";
                 echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
                 echo "<td><a href='/IFRS-Pokepedia/src/addPokemonColecao.php?pokedex_number=" . htmlspecialchars($linha['Pokedex_number']) . "'>Adicionar a sua coleção</a></td>";
                 echo "</tr>";
