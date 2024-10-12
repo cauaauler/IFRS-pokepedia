@@ -9,7 +9,6 @@ nav ul {
 li{
     display: flex;
     align-items: center;
-    margin-left: 2%;
 }
 
 nav ul li a {
@@ -38,4 +37,7 @@ input{
     height: 30px;
     margin-left: 10px;
 
+}
+.email{
+    margin: 0 10px;
 }

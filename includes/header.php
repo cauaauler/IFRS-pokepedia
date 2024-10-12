@@ -33,7 +33,7 @@ if ($id_pessoa) {
         <ul>
             <?php
             if (!empty($email)) {
-                echo "<li>{$email}</li>";
+                echo "<li class='email'>{$email}</li>";
             }
             ?>
             <li><a href="/IFRS-Pokepedia/src/pagina_inicial.php">Início</a></li>
