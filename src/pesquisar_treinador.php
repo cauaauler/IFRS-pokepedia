@@ -17,7 +17,7 @@ $ordem = isset($_GET['ordem']) && in_array(strtolower($_GET['ordem']), $ordem_pe
 $direcao_permitidas = ['asc', 'desc'];
 $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $direcao_permitidas) ? $_GET['direcao'] : 'asc';
 
-$id_pessoa = $_SESSION['id'];
+$email_treinador = $_GET['pesquisar_treinador'];
 
 // Pegar os pokemons
 $stmt = $db->prepare(
@@ -25,12 +25,11 @@ $stmt = $db->prepare(
                           JOIN pessoa p ON p.id_pessoa = pp.id_pessoa
                           JOIN pokemon po ON po.Pokedex_number = pp.pokedex_number
                           JOIN type ON po.Type = type.id_type
-                          WHERE p.id_pessoa = ?
+                          WHERE p.email = ?
                           ORDER BY po." . $ordem . " " . $direcao
 );
 
-// Para passar o id_pessoa corretamente
-$stmt->bind_param("i", $id_pessoa);
+$stmt->bind_param("s", $email_treinador);
 $stmt->execute();
 // Executa a consulta e armazena o resultado
 $resultado = $stmt->get_result();
@@ -44,7 +43,7 @@ $resultado = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Treinador</title>
     <link rel="stylesheet" type="text/css" href="/IFRS-Pokepedia/css/style.css" />
 </head>
 
@@ -57,7 +56,7 @@ $resultado = $stmt->get_result();
 
         <?php
         if ($resultado->num_rows == 0) {
-            echo "Não há pokémon na sua coleção";
+            echo "Treinador não encontrado";
         } else {
             $pokemons = $resultado->fetch_all(MYSQLI_ASSOC);
 
@@ -99,7 +98,6 @@ $resultado = $stmt->get_result();
               <th><a href='/IFRS-Pokepedia/src/perfil.php?ordem=pokedex_number&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Número Pokedex</a></th>
               <th><a href='/IFRS-Pokepedia/src/perfil.php?ordem=type&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Tipagem</a></th>
               <th><a href='/IFRS-Pokepedia/src/perfil.php?ordem=is_legendary&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>É lendário?</a></th>
-              <th>Adicionar a Coleção</th>
               </tr>
               </thead>";
 
@@ -112,7 +110,6 @@ $resultado = $stmt->get_result();
                 echo "<td>{$linha['Pokedex_number']}</td>";
                 echo "<td>{$linha['text']}</td>";
                 echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
-                echo "<td><a href='/IFRS-Pokepedia/src/deletePokemonColecao.php?pokedex_number={$linha['Pokedex_number']}'>Remover da coleção</a></td>";
                 echo "</tr>";
             }
             echo "</table>";

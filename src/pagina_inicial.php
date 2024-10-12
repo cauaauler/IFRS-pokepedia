@@ -48,11 +48,13 @@ $resultado = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
     <link rel="stylesheet" type="text/css" href="/IFRS-Pokepedia/css/style.css" />
+    
 </head>
 
 <body>
     <div class='container'>
 
+    
         <?php include '../includes/header.php'; ?>
 
         <h1>Pokédex</h1>
@@ -65,12 +67,12 @@ $resultado = $stmt->get_result();
             echo "<table>";
             echo "<thead>
                   <tr>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=name&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Nome</a></th>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=attack&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Ataque</a></th>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=defense&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Defesa</a></th>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=pokedex_number&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Número Pokedex</a></th>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=type&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Tipagem</a></th>
-                  <th><a href='/IFRS-Pokepedia/src/restrita_lista.php?ordem=is_legendary&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>É lendário?</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=name&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Nome</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=attack&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Ataque</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=defense&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Defesa</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=pokedex_number&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Número Pokedex</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=type&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>Tipagem</a></th>
+                  <th><a href='/IFRS-Pokepedia/src/pagina_inicial.php?ordem=is_legendary&direcao=" . ($direcao == 'asc' ? 'desc' : 'asc') . "'>É lendário?</a></th>
                   <th>Adicionar a Coleção</th>
                   </tr>
                   </thead>";

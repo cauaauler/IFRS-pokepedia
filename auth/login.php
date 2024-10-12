@@ -41,7 +41,7 @@ if($resultado->num_rows==0){
         //$_SESSION['email'] = $pessoa['email'];
 
         //Redireciona para área restrita
-        header("location:/IFRS-Pokepedia/src/restrita_lista.php");
+        header("location:/IFRS-Pokepedia/src/pagina_inicial.php");
     }else{
         //Redireciona para a página inicial
         header("location: /IFRS-Pokepedia/index.php");

@@ -36,7 +36,13 @@ if ($id_pessoa) {
                 echo "<li>{$email}</li>";
             }
             ?>
-            <li><a href="/IFRS-Pokepedia/src/restrita_lista.php">Início</a></li>
+            <li><a href="/IFRS-Pokepedia/src/pagina_inicial.php">Início</a></li>
+            <li>
+                <form action="/IFRS-Pokepedia/src/pesquisar_treinador.php" method="get">
+                    <input type="text" placeholder="Pesquisar treinador" name="pesquisar_treinador">
+                </form>
+            </li>
+
             <div class="nav_perfil">
                 <li><a href='/IFRS-Pokepedia/src/logout.php'>Logout</a></li>
                 <li><a href='/IFRS-Pokepedia/src/perfil.php'>Meu Perfil</a></li>

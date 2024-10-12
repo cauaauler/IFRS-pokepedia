@@ -19,5 +19,5 @@ if(!isset($_SESSION['id'])){
         //Executa a consulta e armazena o resultado
         $stmt->execute();
 
-        header("location:/IFRS-Pokepedia/src/restrita_lista.php");
+        header("location:/IFRS-Pokepedia/src/pagina_inicial.php");
     }

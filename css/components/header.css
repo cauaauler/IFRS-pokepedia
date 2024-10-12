@@ -32,3 +32,10 @@ nav ul li a:hover {
     margin-left: auto;
     display: flex;
 }
+
+input{
+    width: 200px;
+    height: 30px;
+    margin-left: 10px;
+
+}
