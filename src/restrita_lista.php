@@ -25,32 +25,48 @@ $direcao_permitidas = ['asc', 'desc'];
 $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $direcao_permitidas) ? $_GET['direcao'] : 'asc';
 
 // Query de consulta
-$stmt = $db->prepare("SELECT * FROM pokemon ORDER BY {$ordem} {$direcao}");
+$stmt = $db->prepare("SELECT * FROM pokemon 
+        WHERE pokedex_number NOT IN 
+        (SELECT pokedex_number FROM pessoa_pokemon WHERE id_pessoa = {$id_pessoa})
+        ORDER BY {$ordem} {$direcao} ");    
 $stmt->execute();
 $resultado = $stmt->get_result();
 
+// Query de consulta do email próprio treinador
 $stmt = $db->prepare("SELECT * FROM pessoa WHERE id_pessoa = {$id_pessoa}");
 $stmt->execute();
 $resultado_treinador = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
     <link rel="stylesheet" type="text/css" href="/IFRS-Pokepedia/css/style.css" />
 </head>
+
 <body>
     <div class='container'>
-    <?php 
-$treinador = $resultado_treinador->fetch_assoc();
-echo "<nav>{$treinador['email']} <a href='/IFRS-Pokepedia/src/perfil.php'>Meu Perfil</a></nav>";
-?>
-        
+        <header>
+            <nav>
+                <ul>
+                    <?php
+                    $treinador = $resultado_treinador->fetch_assoc();
+                    echo "<li> {$treinador['email']}</li>";
+                    ?>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#"></a></li>
+                    <li class="nav_perfil"><a href='/IFRS-Pokepedia/src/perfil.php'>Meu Perfil</a></li>
+                </ul>
+            </nav>
+        </header>
+
+
         <h1>Pokédex</h1>
-        
-        <?php 
+
+        <?php
         if ($resultado->num_rows == 0) {
             echo "Não há pokémons cadastrados";
         } else {
@@ -86,4 +102,5 @@ echo "<nav>{$treinador['email']} <a href='/IFRS-Pokepedia/src/perfil.php'>Meu Pe
         ?>
     </div>
 </body>
+
 </html>

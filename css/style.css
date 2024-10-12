@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 *{
     margin: 0;
@@ -7,66 +7,31 @@
     font-family: "Roboto", system-ui;
 }
 
-body,html{
-    height: 100vh;
-    width: 100vw;
+nav ul {
+	list-style-type: none;
+	display: flex;
+	/* justify-content: left; */
+	background-color: black;
+    color: white;
 }
 
-.container{
-    min-height: 100%;
-    display: grid;
-    place-items: center;
-}
-
-.box{
+li{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
+    margin-left: 2%;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 450px;
-    padding: 25px;
-    height: 340px;
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	padding: 10px;
+	display: block;
 }
 
-h1{
-    margin: 10px;
+nav ul li a:hover {
+	background-color: #555;
+}
+.nav_perfil{
+    margin-left: auto;
 }
 
-input[type='text'],input[type = 'email'],input[type='password'], input[type='number']{
-    padding: 5px;
-    margin: 5px;
-}
-
-input[type='submit']{
-    padding: 5px;
-    width: 120px;
-    background-color: white;
-}
-
-.grupo_botao{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-table{
-    border-collapse: collapse;
-}
-
-th,tr,td{
-   border: 1px solid black;
-   padding: 10px; 
-}
-nav {
-    display: flex; 
-    justify-content: flex-start; 
-    text-align: left;
-}

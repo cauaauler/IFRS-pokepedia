@@ -99,7 +99,7 @@ ml>
             echo "<td>{$linha['Pokedex_number']}</td>";
             echo "<td>{$linha['Type']}</td>";
             echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
-            echo "<td><a href='/IFRS-Pokepedia/src/deletePokemonColecao.php'>Remover da coleção</a></td>";
+            echo "<td><a href='/IFRS-Pokepedia/src/deletePokemonColecao.php?pokedex_number={$linha['Pokedex_number']}'>Remover da coleção</a></td>";
             echo "</tr>";
         }
         echo "</table>";
