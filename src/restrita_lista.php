@@ -1,9 +1,10 @@
 <?php
 // Inicia sessão
 session_start();
+
 // Verifica se a sessão foi criada
 if (!isset($_SESSION['id'])) {
-    header("location: /IFRS-Pokepedia/index.php");
+    header("Location: /IFRS-Pokepedia/index.php");
     exit();
 }
 
@@ -15,30 +16,30 @@ if ($db->connect_error) {
     die("Erro de conexão: " . $db->connect_error);
 }
 
+// Obtém o ID da pessoa da sessão
 $id_pessoa = $_SESSION['id'];
 
-
+// Define as colunas e direções de ordenação permitidas
 $ordem_permitidas = ['name', 'attack', 'defense', 'pokedex_number', 'type', 'is_legendary'];
 $ordem = isset($_GET['ordem']) && in_array(strtolower($_GET['ordem']), $ordem_permitidas) ? $_GET['ordem'] : 'pokedex_number';
 
 $direcao_permitidas = ['asc', 'desc'];
 $direcao = isset($_GET['direcao']) && in_array(strtolower($_GET['direcao']), $direcao_permitidas) ? $_GET['direcao'] : 'asc';
 
-// Query de consulta
-$stmt = $db->prepare("SELECT * FROM pokemon 
+// Query de consulta para listar os pokémons que o usuário ainda não tem
+$query = "SELECT * FROM pokemon 
         WHERE pokedex_number NOT IN 
-        (SELECT pokedex_number FROM pessoa_pokemon WHERE id_pessoa = {$id_pessoa})
-        ORDER BY {$ordem} {$direcao} ");    
+        (SELECT pokedex_number FROM pessoa_pokemon WHERE id_pessoa = ?)
+        ORDER BY " . $ordem . " " . $direcao;
+
+$stmt = $db->prepare($query);
+$stmt->bind_param("i", $id_pessoa);
 $stmt->execute();
 $resultado = $stmt->get_result();
 
-// Query de consulta do email próprio treinador
-$stmt = $db->prepare("SELECT * FROM pessoa WHERE id_pessoa = {$id_pessoa}");
-$stmt->execute();
-$resultado_treinador = $stmt->get_result();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -49,20 +50,8 @@ $resultado_treinador = $stmt->get_result();
 
 <body>
     <div class='container'>
-        <header>
-            <nav>
-                <ul>
-                    <?php
-                    $treinador = $resultado_treinador->fetch_assoc();
-                    echo "<li> {$treinador['email']}</li>";
-                    ?>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#"></a></li>
-                    <li class="nav_perfil"><a href='/IFRS-Pokepedia/src/perfil.php'>Meu Perfil</a></li>
-                </ul>
-            </nav>
-        </header>
-
+ 
+        <?php include '../includes/header.php'; ?>
 
         <h1>Pokédex</h1>
 
@@ -86,19 +75,17 @@ $resultado_treinador = $stmt->get_result();
 
             foreach ($pokemons as $linha) {
                 echo "<tr>";
-                echo "<td>{$linha['Name']}</td>";
-                echo "<td>{$linha['Attack']}</td>";
-                echo "<td>{$linha['Defense']}</td>";
-                echo "<td>{$linha['Pokedex_number']}</td>";
-                echo "<td>{$linha['Type']}</td>";
+                echo "<td>" . htmlspecialchars($linha['Name']) . "</td>";
+                echo "<td>" . htmlspecialchars($linha['Attack']) . "</td>";
+                echo "<td>" . htmlspecialchars($linha['Defense']) . "</td>";
+                echo "<td>" . htmlspecialchars($linha['Pokedex_number']) . "</td>";
+                echo "<td>" . htmlspecialchars($linha['Type']) . "</td>";
                 echo "<td>" . ($linha['Is_legendary'] == 0 ? "Não" : "Sim") . "</td>";
-                echo "<td><a href='/IFRS-Pokepedia/src/addPokemonColecao.php?pokedex_number={$linha['Pokedex_number']}'>Adicionar a sua coleção</a></td>";
+                echo "<td><a href='/IFRS-Pokepedia/src/addPokemonColecao.php?pokedex_number=" . htmlspecialchars($linha['Pokedex_number']) . "'>Adicionar a sua coleção</a></td>";
                 echo "</tr>";
             }
             echo "</table>";
         }
-
-        echo "<a href='/IFRS-Pokepedia/src/logout.php'>Sair</a>";
         ?>
     </div>
 </body>

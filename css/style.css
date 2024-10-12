@@ -25,7 +25,13 @@ nav ul li a {
 	color: white;
 	text-decoration: none;
 	padding: 10px;
-	display: block;
+}
+a {
+    display: flex;             /* Define como flex container */
+    justify-content: center;    /* Centraliza horizontalmente */
+    align-items: center;        /* Centraliza verticalmente */
+    height: 100%;               /* Preenche a altura disponível */
+    text-align: center;         /* Centraliza o texto horizontalmente no caso de múltiplas linhas */
 }
 
 nav ul li a:hover {
@@ -33,5 +39,6 @@ nav ul li a:hover {
 }
 .nav_perfil{
     margin-left: auto;
+    display: flex;
 }
 
