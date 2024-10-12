@@ -57,7 +57,7 @@ $resultado = $stmt->get_result();
 
         <?php
         if ($resultado->num_rows == 0) {
-            echo "Não há pokémon na sua coleção";
+            echo "<p>Não há pokémons na sua coleção</p>";
         } else {
             $pokemons = $resultado->fetch_all(MYSQLI_ASSOC);
 
@@ -71,24 +71,29 @@ $resultado = $stmt->get_result();
                 $totalDefesa += $linha['Defense'];
             }
 
+
+            echo "<h2>{$linha['email']}</h2>";
+
             echo "<table>";
             echo "<thead>
              <tr>
-             <th>Email</th>
              <th>Média Ataque</th>
              <th>Média Defesa</th>
              </tr>
         </thead>";
-            echo "</table>";
+
 
             $mediaDefesa = $totalDefesa / $quantidade;
             $mediaAtaque = $totalAtaque / $quantidade;
 
+            $mediaAtaqueFormatada = number_format($mediaAtaque, 1);
+            $mediaDefesaFormatada = number_format($mediaDefesa, 1);
+
             echo "<tr>";
-            echo "<td>{$linha['email']}</td>";
-            echo "<td>$mediaAtaque</td>";
-            echo "<td>$mediaDefesa</td>";
+            echo "<td>$mediaAtaqueFormatada</td>";
+            echo "<td>$mediaDefesaFormatada</td>";
             echo "</tr>";
+            echo "</table>";
 
             echo "<table>";
             echo "<thead>

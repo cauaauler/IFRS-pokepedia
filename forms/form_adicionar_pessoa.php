@@ -60,7 +60,7 @@ if (isset($_POST['botao'])) {
             <h1>Adicionar pessoa</h1>
             <form method='post' action='/IFRS-Pokepedia/forms/form_adicionar_pessoa.php'>
                 <label>E-mail:</label>
-                <input type='text' name='email' required>
+                <input type='email' name='email' required>
                 <label>Senha:</label>
                 <input type='password' name='senha' required>
                 <div class='grupo_botao'>

@@ -12,7 +12,7 @@
             <h1>Pokedéx</h1>
             <form action='/IFRS-Pokepedia/auth/login.php' method='post'>
                 <label>E-mail:</label>
-                <input type='text' name='email' require>
+                <input type='email' name='email' require>
                 <label>Senha:</label>
                 <input type='password' name='senha' require>
                 <div class='grupo_botao'>

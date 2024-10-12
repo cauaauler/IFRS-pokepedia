@@ -8,4 +8,31 @@
     font-family: "Roboto", system-ui;
 }
 
+table {
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 20px auto; /* Centraliza a tabela */
+    border: 1px solid black;
+    border-spacing: 0;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+td, th{
+    padding: 10px;
+}
+
+h1, h2, p{
+    text-align: center;
+    margin: 10px;
+}
+
+
+
+
 
